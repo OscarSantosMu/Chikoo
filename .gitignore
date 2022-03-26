@@ -1,0 +1,5 @@
+# Ignore vs settings folder
+.vs
+
+MedicalApp/bin
+MedicalApp/obj
