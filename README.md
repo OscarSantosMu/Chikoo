@@ -39,9 +39,9 @@ Once you have finished this, chikoo will send you a link with a QR code that you
 ---
 
 <div align="center">
-    <img src="https://github.com/OscarSantos98/Medical-preconsultation/blob/main/img/Phone%201.png" width="200px" />
-    <img src="https://github.com/OscarSantos98/Medical-preconsultation/blob/main/img/Phone%202.png" width="200px" />
-    <img src="https://github.com/OscarSantos98/Medical-preconsultation/blob/main/img/Phone%203.png" width="200px" />
+    <img src="/static/img/Phone%201.png" width="200px" />
+    <img src="/static/img/Phone%202.png" width="200px" />
+    <img src="/static/img/Phone%203.png" width="200px" />
 </div>
 
 ---
@@ -50,7 +50,7 @@ Thus guaranteeing a simple, fast and efficient consultation process.
 Chikoo is a perfect tool for anyone who doesn't feel capable of using today's applications, such as the elderly or parents who have a very busy schedule.
 
 <div align="center">
-    <img src="/img/demopdf.jpg" width="300px"/>
+    <img src="/static/img/demopdf.jpg" width="300px"/>
 </div>
 
 ---
