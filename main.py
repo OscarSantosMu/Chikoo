@@ -3,7 +3,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table
 from reportlab.lib.styles import ParagraphStyle
-from firebase_admin import credentials, storage
+from firebase_admin import credentials, storage, initialize_app
 import firebase_admin
 
 """
@@ -18,7 +18,7 @@ import firebase_admin
 """
 
 # Initialize firebase app
-cred = credentials.Certificate("./firebase_admin.json")
+cred = credentials.Certificate("./firebase_credentials.json")
 firebase_app= firebase_admin.initialize_app(cred, {
     'storageBucket': 'chikoo-ac2ab.appspot.com'
 })
