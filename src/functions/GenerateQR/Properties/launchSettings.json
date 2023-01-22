@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "GenerateQR": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7168",
+      "launchBrowser": false
+    }
+  }
+}
