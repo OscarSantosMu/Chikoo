@@ -1,8 +1,6 @@
 from fastapi import FastAPI
-from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table
-from reportlab.lib.styles import ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Image, Table
 from firebase_admin import credentials, storage, initialize_app
 import firebase_admin
 
@@ -17,31 +15,30 @@ import firebase_admin
 
 # Initialize firebase app
 cred = credentials.Certificate("./firebase_credentials.json")
-firebase_app= firebase_admin.initialize_app(cred, {
+firebase_app = firebase_admin.initialize_app(cred, {
     'storageBucket': 'chikoo-ac2ab.appspot.com'
 })
+print(type(firebase_app))
 
-# url="https://chikoo.github-pages.com/2ASK3KS"
-# HASH_KEY = url.split("/")[3]
 
 # Initialize REST API
 app = FastAPI()
 
-
 @app.get("/")
-def read_root():
+def read_root() -> object:
     return {"Hello": "World"}
 
 
 @app.get("/pdf")
-def generate_pdf():
+def generate_pdf() -> object:
     """
-        Generates a PDF file, stores it in Firebase Storage and returns the download url to the user 
+        Generates a PDF file, stores it in Firebase Storage and returns the download url to the user
+        Returns: Json with the URL of the PDF file stored in Firebase Storage
     """
 
     pdf_file = SimpleDocTemplate("hello_world.pdf", pagesize=letter)
     elements = []
-    
+
     # Add H1 header
     elements.append(Paragraph("<h1>Hello World!</h1>"))
 
@@ -54,10 +51,18 @@ def generate_pdf():
     table = Table(data)
     elements.append(table)
     pdf_file.build(elements)
+    url = store_pdf_in_firebase(firebase_app)
+    return {"pdf": url}
 
-    # Store the PDF in Firebase Storage
-    bucket = storage.bucket(app=firebase_app)
+
+def store_pdf_in_firebase(fb_app: firebase_admin.App) -> str:
+    """
+        Stores the PDF file in Firebase Storage
+        Returns: The Firebase Storage URL
+    """
+
+    bucket = storage.bucket(app=fb_app)
     pdf_blob = bucket.blob("hello_world.pdf")
     pdf_blob.upload_from_filename("hello_world.pdf")
     pdf_url = pdf_blob.generate_signed_url(expiration=3000000000)
-    return {"pdf": pdf_url}
+    return pdf_url
