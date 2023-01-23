@@ -35,7 +35,7 @@ namespace Chikoo.Functions
                     var doc = new Document(pdf);
 
                     // Add content to the PDF document
-                    doc.Add(new Paragraph("Hello, PDF!"));
+                    BuildPDF(doc);
 
                     doc.Close();
                 }
@@ -48,6 +48,11 @@ namespace Chikoo.Functions
 
                 return response;
             }
+        }
+
+        public static void BuildPDF(Document doc)
+        {
+            doc.Add(new Paragraph("Hello, PDF!"));
         }
     }
 }
