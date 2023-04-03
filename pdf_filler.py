@@ -2,8 +2,8 @@ from typing import Optional
 from PIL import Image, ImageDraw, ImageFont
 
 # Fonts
-regular_font = ImageFont.truetype('./Inter-Regular.ttf', 14)
-bold_font = ImageFont.truetype('./Inter-Bold.ttf', 20)
+regular_font = ImageFont.truetype('.static/Inter-Regular.ttf', 14)
+bold_font = ImageFont.truetype('.static/Inter-Bold.ttf', 20)
 
 
 def fill_pdf(data: dict) -> Image:
@@ -11,7 +11,7 @@ def fill_pdf(data: dict) -> Image:
         Fills the Chikoo_Document_Format image with the data of the user 
         Returns: Image class with the user's data 
     """
-    image = Image.open("Document_Format.png")
+    image = Image.open(".static/img/Document_Format.png")
     draw = ImageDraw.Draw(image)
 
     # Form Fillment Status
