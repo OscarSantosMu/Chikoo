@@ -1,7 +1,9 @@
 from fastapi import FastAPI
-from pdf_filler import fill_pdf
 from firebase_admin import credentials, storage, initialize_app
 import firebase_admin
+
+from pdf_filler import fill_pdf
+
 
 # Initialize firebase app
 cred = credentials.Certificate("./firebase_credentials.json")

@@ -2,8 +2,8 @@ from typing import Optional
 from PIL import Image, ImageDraw, ImageFont
 
 # Fonts
-regular_font = ImageFont.truetype('.static/Inter-Regular.ttf', 14)
-bold_font = ImageFont.truetype('.static/Inter-Bold.ttf', 20)
+regular_font = ImageFont.truetype('./static/Inter-Regular.ttf', 14)
+bold_font = ImageFont.truetype('./static/Inter-Bold.ttf', 20)
 
 
 def fill_pdf(data: dict) -> Image:
