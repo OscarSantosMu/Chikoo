@@ -57,3 +57,7 @@ def store_pdf_in_firebase(fb_app: firebase_admin.App) -> str:
     pdf_blob.upload_from_filename("chikoo.png")
     pdf_url = pdf_blob.generate_signed_url(expiration=3000000000)
     return pdf_url
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
