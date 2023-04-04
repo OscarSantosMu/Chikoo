@@ -11,7 +11,7 @@ def fill_pdf(data: dict) -> Image:
         Fills the Chikoo_Document_Format image with the data of the user 
         Returns: Image class with the user's data 
     """
-    image = Image.open(".static/img/Document_Format.png")
+    image = Image.open("./static/img/Document_Format.png")
     draw = ImageDraw.Draw(image)
 
     # Form Fillment Status
