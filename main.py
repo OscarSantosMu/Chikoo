@@ -1,9 +1,16 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from firebase_admin import credentials, storage, initialize_app
 import firebase_admin
+from twilio.twiml.messaging_response import MessagingResponse
+from twilio.rest import Client
+import uvicorn
 
 from pdf_filler import fill_pdf
 
+
+account_sid = 'AC01a324f7bb0dcceb216c28547f79bc01'
+auth_token = 'f852f9489364de450637f2b3290faf19'
+client = Client(account_sid, auth_token)
 
 # Initialize firebase app
 cred = credentials.Certificate("./firebase_credentials.json")
@@ -63,6 +70,35 @@ async def response(request: Request):
     return str(twiml_response)
 
 
+@app.post("/bot")
+async def bot(request: Request):
+    # Obtener el mensaje entrante y el número de teléfono del remitente
+    mensaje = (await request.form())["Body"]
+    remitente = (await request.form())["From"]
+
+    # Procesar el mensaje entrante y enviar una respuesta
+    # Verificar si el mensaje contiene las palabras "cat" o "dog"
+    if "cat" in mensaje.lower():
+        respuesta = "miau miau miau"
+    elif "dog" in mensaje.lower():
+        respuesta = "woof woof woof"
+    else:
+        respuesta = "I love animals!"
+
+    # Crear una respuesta de TwiML
+    twiml_respuesta = MessagingResponse()
+    twiml_respuesta.message(from_="whatsapp:+14155238886",
+                            to="whatsapp:+5219213043932", body=respuesta)
+    send_msg(respuesta)
+    return str(twiml_respuesta)
+
+
+def send_msg(msg):
+    client.messages.create(
+        from_="whatsapp:+14155238886",
+        to="whatsapp:+5219213043932", body=msg)
+
+
 def store_pdf_in_firebase(fb_app: firebase_admin.App) -> str:
     """
         Stores the PDF file in Firebase Storage
@@ -75,6 +111,7 @@ def store_pdf_in_firebase(fb_app: firebase_admin.App) -> str:
     pdf_url = pdf_blob.generate_signed_url(expiration=3000000000)
     return pdf_url
 
+
 if __name__ == "__main__":
-    import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
