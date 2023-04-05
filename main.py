@@ -46,6 +46,23 @@ def generate_pdf() -> object:
     return {"pdf": url}
 
 
+@app.post("/response")
+async def response(request: Request):
+    # Obtener el message entrante y el número de teléfono del sender
+    message = (await request.form())["Body"]
+    sender = (await request.form())["From"]
+
+    # Procesar el message entrante y enviar una respuesta
+    # Puedes personalizar esta lógica según tus necesidades
+    respuesta = f'Hola! Has enviado el siguiente message: {message}. Tu número de teléfono es: {sender}'
+
+    # Crear una respuesta de TwiML
+    twiml_response = MessagingResponse()
+    twiml_response.message(response)
+
+    return str(twiml_response)
+
+
 def store_pdf_in_firebase(fb_app: firebase_admin.App) -> str:
     """
         Stores the PDF file in Firebase Storage
