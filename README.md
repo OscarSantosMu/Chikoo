@@ -1,3 +1,4 @@
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/57787993/160266262-6a293d91-d789-4af6-8b8c-61c251ea3542.png" width="200px"/>
 </div>
@@ -99,5 +100,52 @@ Chikoo is a perfect tool for anyone who doesn't feel capable of using today's ap
 </table>
 <!-- readme: Technologies used to build azure-end -->
 
+<!-- readme: Development -->
 
+# Installing
+### Creating a virtual environment
+First, make sure you have the virtualenv package installed on your system. If you don't have it, you can install it using the following command:
+
+```python 
+pip install virtualenv
+```
+
+Then, create a new virtual environment by running the following command:
+
+```python 
+virtualenv env
+```
+
+This will create a new directory called env in the current directory, which contains the virtual environment. You can activate the virtual environment by running the following command:
+
+```python 
+source env/bin/activate
+```
+
+Now you are in the virtual environment and can install the required packages.
+
+### Installing packages using pip
+The packages you need can be specified in a requirements.txt file. Each package should be on a separate line. For example, if you need to install the flask and firebase packages, the requirements.txt file should look like this:
+
+```python 
+flask
+firebase
+```
+
+To install the packages, run the following command:
+
+```python 
+pip install -r requirements.txt
+```
+
+This will install all the packages listed in the requirements.txt file.
+
+### Deactivating the virtual environment
+Once you are done working with the virtual environment, you can deactivate it by running the following command:
+
+```python 
+deactivate
+```
+
+This will return you to the original operating system environment.
 
