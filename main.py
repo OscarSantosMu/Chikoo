@@ -1,42 +1,36 @@
+import os
+import json
+from dotenv import load_dotenv
+
 from fastapi import FastAPI, Request
-from firebase_admin import credentials, storage, initialize_app
-import firebase_admin
-from twilio.twiml.messaging_response import MessagingResponse
-from twilio.rest import Client
 import uvicorn
 
-from pdf_filler import fill_pdf
+from firebase_admin import credentials, storage, initialize_app
+import firebase_admin
 
+from twilio.twiml.messaging_response import MessagingResponse
+from twilio.rest import Client
 
-account_sid = 'AC01a324f7bb0dcceb216c28547f79bc01'
-auth_token = 'f852f9489364de450637f2b3290faf19'
+from chikoo_document import ChikooDocument
+from testing_info import family_history, foods_per_week, data, activities_per_week
+
+load_dotenv()
+account_sid = os.getenv('ACCOUNT_SID')
+auth_token = os.getenv('AUTH_TOKEN')
 client = Client(account_sid, auth_token)
 
 # Initialize firebase app
-cred = credentials.Certificate("./firebase_credentials.json")
-firebase_app = firebase_admin.initialize_app(cred, {
-    'storageBucket': 'chikoo-ac2ab.appspot.com'
+
+with open('./firebase_credentials.json', 'r', encoding="utf-8") as f:
+    firebase_creds = credentials.Certificate(json.load(f))
+
+firebase_app = initialize_app(firebase_creds, {
+    'storageBucket': os.environ.get('STORAGE_BUCKET')
 })
 
-data = {
-    'direct_fillment': False,
-    'name_of_filler_person': 'David Lazaro',
-    'name': 'David',
-    'age': '22',
-    'sex': 'Masculine',
-    'last_name': 'Lazaro Fernandez',
-    'birth_date': '13/12/2000',
-    'place_of_birth': 'Minatitlan, Veracruz',
-    'adress': 'Sabinas',
-    'pc': '1222222',
-    'phone_number': 'I prefer not to respond',
-    'work_status': 'I prefer not to respond',
-}
 
 # Initialize REST API
 app = FastAPI()
-
-
 @app.get("/")
 def read_root() -> object:
     return {"Hello": "World"}
@@ -48,36 +42,17 @@ def generate_pdf() -> object:
         Generates a PDF file, stores it in Firebase Storage and returns the download url to the user
         Returns: Json with the URL of the PDF file stored in Firebase Storage
     """
-    fill_pdf(data)
+    chikoo = ChikooDocument(data=data, foods_per_week=foods_per_week, family_history=family_history, activities=activities_per_week)
+    document = chikoo.create_document()
     url = store_pdf_in_firebase(firebase_app)
     return {"pdf": url}
 
 
-@app.post("/response")
-async def response(request: Request):
-    # Obtener el message entrante y el número de teléfono del sender
-    message = (await request.form())["Body"]
-    sender = (await request.form())["From"]
-
-    # Procesar el message entrante y enviar una respuesta
-    # Puedes personalizar esta lógica según tus necesidades
-    respuesta = f'Hola! Has enviado el siguiente message: {message}. Tu número de teléfono es: {sender}'
-
-    # Crear una respuesta de TwiML
-    twiml_response = MessagingResponse()
-    twiml_response.message(response)
-
-    return str(twiml_response)
-
-
 @app.post("/bot")
 async def bot(request: Request):
-    # Obtener el mensaje entrante y el número de teléfono del remitente
     mensaje = (await request.form())["Body"]
     remitente = (await request.form())["From"]
 
-    # Procesar el mensaje entrante y enviar una respuesta
-    # Verificar si el mensaje contiene las palabras "cat" o "dog"
     if "cat" in mensaje.lower():
         respuesta = "miau miau miau"
     elif "dog" in mensaje.lower():
