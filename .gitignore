@@ -11,9 +11,9 @@
 *.sln.docstates
 
 #Firebase Credentials 
-/firebase_credentials.json
+firebase_credentials.json
 #Env variables
-/.env
+.env
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
