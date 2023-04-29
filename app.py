@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 import cohere
 from classifications import examples
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from mako.template import Template
 
 app = Flask(__name__)
 
@@ -32,16 +36,24 @@ def register():
 
     email = data['email']
     display_name = data.get('display_name', 'Usuario')
+    image_url = "https://www.tigrehacks.me/logo.png"
+
+    email_template = Template(filename='email_template.mako')
+
+    # Renderiza la plantilla con los datos del usuario
+    html_content = email_template.render(display_name=display_name, image_url=image_url)
 
     # Configura el contenido del correo electrónico de bienvenida
-    message = MIMEText(f'¡Hola {display_name}! Gracias por registrarte en nuestra app. Esperamos que disfrutes de nuestra plataforma.')
-    message['Subject'] = 'Gracias por registrarte en la app'
+    message = MIMEMultipart()
+    message['Subject'] = 'Gracias por registrarte en Tigre Hacks 🐯'
     message['From'] = 'bisontech0@gmail.com'
     message['To'] = email
+    message.attach(MIMEText(html_content, 'html'))
+
 
     # Configura las credenciales de tu servicio de correo electrónico aquí
-    username = 'tuemail@gmail.com'
-    password = 'tupassword'
+    username = 'bisontech0@gmail.com'
+    password = 'imkkiakbdsletupm'
 
     # Envía el correo electrónico
     try:

@@ -14,6 +14,16 @@ function agregarMensaje() {
 }
 
 function procesarMensaje(texto) {
+  fetch('/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ 'email': 'fmaldonado824@gmail.com', "display_name":"Fernando" })
+  })
+  .then(res => console.log(res))
+  .catch(err => console.error(err))
+
   fetch('/manage_message', {
     method: 'POST',
     headers: {
