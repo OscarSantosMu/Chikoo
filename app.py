@@ -5,10 +5,13 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from mako.template import Template
+from flask_cors import CORS
 
 app = Flask(__name__)
 
 co = cohere.Client('VI8IBNMDAZhU8FoqXh81eoM988zV4f8cjgw0EyBZ')
+CORS(app)
+
 
 
 @app.route('/')
