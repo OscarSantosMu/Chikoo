@@ -5,7 +5,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from mako.template import Template
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 
@@ -34,6 +34,7 @@ def manage_message():
         return jsonify({'mensaje': prediction})    
 
 @app.route('/register', methods=['POST'])
+@cross_origin
 def register():
     data = request.get_json()
 
