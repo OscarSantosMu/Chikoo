@@ -1,0 +1,116 @@
+* {
+    font-family: 'Inter', 'Sans-Serif';
+}
+
+.chat-name{
+    font-size: 24px;
+    font-weight: 600;
+    color: #020202;
+}
+.outer-div {
+    background-color: #eff7fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.inner-div {
+    background-color: #FFFFFF;
+    width: 800px;
+    height: 100hv;
+    border-radius: 50px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 0.5px solid #EAEAEA;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.5px solid #EAEAEA;
+    padding-bottom: 10px;
+    
+}
+
+.header img {
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.chat-area {
+    margin-top: 30px;
+    overflow-y: scroll;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.chat-message {
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 50%;
+    animation-name: fade;
+    animation-duration: 0.4s;
+}
+
+.chat-message-right {
+    align-self: flex-end;
+    background-color: #cecbf9;
+    border-radius: 10px 0px 10px 10px;
+}
+
+.chat-message-left {
+    align-self: flex-start;
+    background-color: #F2F2F2;
+    border-radius: 0px 10px 10px 10px;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.input-area input[type="text"] {
+    background-color: #F1F1F1;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    flex-grow: 1;
+    margin-right: 10px;
+    color: #747474;
+}
+
+.input-area button {
+    background-color: #000;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.input-area button:hover {
+    background-color: #666666;
+}
+
+
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
