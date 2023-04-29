@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 import cohere
 from classifications import examples
 import smtplib
@@ -6,6 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from mako.template import Template
 from flask_cors import CORS, cross_origin
+from functools import wraps
 
 app = Flask(__name__)
 
@@ -32,9 +33,22 @@ def manage_message():
             examples=examples)
         prediction = classifications[0].prediction
         return jsonify({'mensaje': prediction})    
+    
 
-@app.route('/register', methods=['POST'])
-@cross_origin(origins="https://tigrehacks.me")
+def add_cors_headers(func):
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        response = make_response(func(*args, **kwargs))
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        return response
+
+    return decorated_function
+
+
+@app.route('/register', methods=['POST','OPTIONS'])
+@add_cors_headers
 def register():
     data = request.get_json()
 
