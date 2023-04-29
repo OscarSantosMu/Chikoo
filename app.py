@@ -49,6 +49,7 @@ def add_cors_headers(func):
 
 @app.route('/register', methods=['POST','OPTIONS'])
 @add_cors_headers
+@cross_origin()
 def register():
     data = request.get_json()
 
