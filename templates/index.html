@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/styles/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <title>Chikoo</title>
+
+</head>
+
+<body>
+    
+    <div class="outer-div">
+        <div class="inner-div">
+            <div class="header">
+                <img src="../static/img/chikoo_logo.png" alt="Imagen de perfil">
+                <span class="chat-name">Chikoo</span>
+            </div>
+            <div class="chat-area">
+                <div class="chat-message chat-message-right">
+					My Message
+				</div>
+				<div class="chat-message chat-message-left">
+					Chikoo Message
+				</div>
+            </div>
+            <div class="input-area">
+                <input type="text" id="messageHolder" placeholder="Type a message to Chikoo here 👋">
+                <button onclick="agregarMensaje()">Send now</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../static/js/socket.js">
+
+    </script>
+</body>
+
+</html>
