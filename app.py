@@ -34,7 +34,7 @@ def manage_message():
         return jsonify({'mensaje': prediction})    
 
 @app.route('/register', methods=['POST'])
-@cross_origin
+@cross_origin(origins="https://tigrehacks.me")
 def register():
     data = request.get_json()
 
