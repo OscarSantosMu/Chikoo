@@ -13,8 +13,12 @@
     <br/>
     <br/>
     
+    <p style="font-family:'Helvetica', font-size:14px">Recuerda seguirnos en nuestras redes sociales para participar en nuestras dinamicas para el hackathon 💻📱</p>
+    <p style="font-family:'Helvetica', font-size:14px">Instagram 📷: <a href="https://www.instagram.com/bisontech_/">https://www.instagram.com/bisontech_/</a></p>
+    <p style="font-family:'Helvetica', font-size:14px">Facebook 📘: <a href="https://www.facebook.com/bisontech1">https://www.facebook.com/bisontech1</a></p>
+    
     <b style="font-family:'Helvetica', font-size:14px">Atentamente</b>
-    <p style="font-family:'Helvetica', font-size:14px">Equipo organizador de Tigre Hacks</p>
+    <p style="font-family:'Helvetica', font-size:14px">Equipo organizador de Tigre Hacks 🐅</p>
     <br/>
     <br/>
     <br/>
